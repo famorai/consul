@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  consul_master:
+    build: .
+    container_name: consul_master
+    restart: always
+    tty: true
+    ports:
+     - "8080:80"
+     - "8500:8500"
+    networks:
+      - ans-app-network
+
+  consul_client_ans:
+    build: .
+    container_name: consul_client_ans
+    restart: always
+    tty: true
+    ports:
+      - "8081:80"
+    networks:
+      - ans-app-network
+    
+  consul_client_ans_2:
+      build: .
+      container_name: consul_client_ans_2
+      restart: always
+      tty: true
+      ports:
+        - "8082:80"
+      networks:
+        - ans-app-network
+networks:
+    ans-app-network:
+       driver: bridge
